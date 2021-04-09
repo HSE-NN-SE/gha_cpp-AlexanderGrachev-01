@@ -16,7 +16,7 @@ jobs:
   # This workflow contains a single job called "build"
   hello_gha:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,4 +36,10 @@ jobs:
           name: my-artifact
           path: "*.exe"
           retention-days: 1
-
+          
+      - name: send default message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO_DEBUG }}
+          token: ${{ secrets.TELEGRAM_TOKEN_DEBUG }}
+          message: Hello world!
